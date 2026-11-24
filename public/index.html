@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Страж сердца</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <!-- Игровое поле 480x480 рисуется на canvas -->
+  <canvas id="field" width="480" height="480"></canvas>
+
+  <!-- Информационная панель: счёт, время, скорость -->
+  <aside id="hud" hidden>
+    <div class="row"><span>СЧЁТ</span><b id="hud-score">0</b></div>
+    <div class="row"><span>ВРЕМЯ</span><b id="hud-time">00:00</b></div>
+    <div class="row"><span>СКОРОСТЬ</span><b id="hud-speed">200</b><div class="bar"><i id="hud-bar"></i></div></div>
+    <p class="hint">W A S D — щит<br>Esc — пауза</p>
+  </aside>
+
+  <!-- Экраны (меню и т. д.) — обычная вёрстка поверх игры -->
+  <section id="screen-menu" class="screen st">
+    <h1 class="ti">СТРАЖ СЕРДЦА</h1>
+    <div class="col">
+      <div class="btn item" data-action="start">СТАРТ</div>
+      <div class="btn item" data-action="records">РЕКОРДЫ</div>
+      <div class="btn item" data-action="settings">НАСТРОЙКИ</div>
+      <div class="btn item" data-action="exit">ВЫЙТИ</div>
+    </div>
+    <p class="hint">W / S — выбор · Enter — подтвердить</p>
+  </section>
+
+  <section id="screen-pause" class="screen st" hidden>
+    <h1 class="ti s">ПАУЗА</h1>
+    <div class="col">
+      <div class="btn item" data-action="resume">ПРОДОЛЖИТЬ</div>
+      <div class="btn item" data-action="restart">ЗАНОВО</div>
+      <div class="btn item" data-action="settings">НАСТРОЙКИ</div>
+      <div class="btn item" data-action="menu">ГЛАВНОЕ МЕНЮ</div>
+    </div>
+    <p class="hint">W / S — выбор · Enter — подтвердить · Esc — продолжить</p>
+  </section>
+
+  <section id="screen-settings" class="screen st" hidden>
+    <div class="col"><div class="pill">НАСТРОЙКИ</div></div>
+    <div class="sls">
+      <div class="sl item" data-key="sound"><div class="lb"><span>ЗВУК</span><span class="val"></span></div><div class="tr"><i></i><u></u></div></div>
+      <div class="sl item" data-key="music"><div class="lb"><span>МУЗЫКА</span><span class="val"></span></div><div class="tr"><i></i><u></u></div></div>
+    </div>
+    <p class="hint">W / S — выбор · A / D — изменить · Esc — назад</p>
+  </section>
+
+  <section id="screen-records" class="screen st" hidden>
+    <div class="bk" data-action="back">←</div>
+    <h1 class="rt">ТОП 10</h1>
+    <div id="rec-list" class="lst"></div>
+    <p id="rec-msg" class="msg"></p>
+    <p class="hint">Esc — назад</p>
+  </section>
+
+  <section id="screen-gameover" class="screen dim" hidden>
+    <div class="pn">
+      <div class="t">ПОРАЖЕНИЕ</div>
+      <div class="s"><span>ВРЕМЯ: <b id="go-time"></b></span><span>СЧЁТ: <b id="go-score"></b></span></div>
+      <div id="go-entry" hidden>
+        <div class="q">Новый рекорд! Введите имя и нажмите Enter:</div>
+        <input id="go-name" class="inp" maxlength="12" autocomplete="off" spellcheck="false">
+      </div>
+      <p id="go-msg" class="msg"></p>
+      <div class="btn item" data-action="restart">ЗАНОВО</div>
+      <div class="btn item" data-action="menu">ГЛАВНОЕ МЕНЮ</div>
+    </div>
+  </section>
+
+  <section id="screen-exit" class="screen st" hidden>
+    <h1 class="ti s">ИГРА ЗАВЕРШЕНА</h1>
+    <p class="bye">Можно закрыть вкладку браузера.</p>
+    <p class="hint">Esc — вернуться в меню</p>
+  </section>
+</div>
+
+<script src="api.js"></script>
+<script src="sound.js"></script>
+<script src="game.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
